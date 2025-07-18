@@ -1,4 +1,4 @@
-import React, { use } from "react"
+import React from "react"
 
 export default function FetchPractice() {
     const [starWarsData, setStarWarsData] = React.useState(null)
