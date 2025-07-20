@@ -1,6 +1,7 @@
 import Header from "./components/Header";
 import Main from "./components/Main";
 import FetchPractice from "./FetchPractice";
+import DisplayWindow from "./DisplayWindow";
 
 function App() {
   return (
@@ -8,7 +9,8 @@ function App() {
     //   <Header />
     //   <Main />
     // </>
-    <FetchPractice />
+    // <FetchPractice />
+    <DisplayWindow />
   )
 }
 
