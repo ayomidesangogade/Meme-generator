@@ -5,12 +5,12 @@ import DisplayWindow from "./DisplayWindow";
 
 function App() {
   return (
-    // <>
-    //   <Header />
-    //   <Main />
-    // </>
+    <>
+      <Header />
+      <Main />
+    </>
     // <FetchPractice />
-    <DisplayWindow />
+    // <DisplayWindow />
   )
 }
 
