@@ -4,26 +4,27 @@ export default function Main() {
     const [memeInfo, setMemeInfo] = React.useState({
         topText : "One does not simply",
         bottomText : "Walk into Mordor ",
-        // imageUrl : "http://i.imgflip.com/1bij.jpg"
+        imageUrl : "http://i.imgflip.com/1bij.jpg",
+        imageAlt : ""
     })
-    const [meme, setMeme] = React.useState({})
-    const [change, setChange] = React.useState(false)
+    const [allMemes, setAllMemes] = React.useState([])
 
-    function getRandomInt(min, max) {
-        min = Math.ceil(min)
-        max = Math.floor(max)
-        return Math.floor(Math.random() * (max - min + 1)) + min
+    function getRandomMemeImage() {
+        const randomNumber = Math.floor(Math.random() * allMemes.length)
+        const newMemeName = allMemes[randomNumber].name
+        const newMemeUrl = allMemes[randomNumber].url
+        setMemeInfo(prev => ({
+            ...prev, 
+            imageUrl: newMemeUrl,
+            imageAlt: newMemeName
+        }))
     }
 
     React.useEffect(() => {       
         fetch("https://api.imgflip.com/get_memes")
             .then(res => res.json())
-            .then(data => {
-                let randomNum = getRandomInt(0, data.data.memes.length - 1)
-                setMeme(data.data.memes[randomNum])
-            })
-        console.log(meme)
-    }, [change])
+            .then(data => setAllMemes(data.data.memes))
+    }, [])
 
     function handleChanges(event) {
         const {name, value} = event.target
@@ -51,10 +52,10 @@ export default function Main() {
                         onChange={handleChanges}
                     />
                 </label>
-                <button onClick={() => setChange(prev => !prev)}>Get a new meme image 🖼</button>
+                <button onClick={getRandomMemeImage}>Get a new meme image 🖼</button>
             </div>
             <div className="meme">
-                <img src={meme.url} alt={meme.name} />
+                <img src={memeInfo.imageUrl} alt={memeInfo.imageAlt} />
                 <span className="top">{memeInfo.topText}</span>
                 <span className="bottom">{memeInfo.bottomText}</span>
             </div>
